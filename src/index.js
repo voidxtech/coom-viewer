@@ -160,6 +160,13 @@ function embedVideo(cellId, link) {
           clearElement(cell);
           cell.appendChild(embed);
         }
+      } else if((match = link.match(/^(https?:\/\/)?(www.)?pornhub.com\/view_video.php\?viewkey\=(\w+)/))) {
+        const id = match[3];
+        if(id) {
+          embed.src = `https://www.pornhub.com/embed/${id}`;
+          clearElement(cell);
+          cell.appendChild(embed);
+        }
       }
     }
   }
