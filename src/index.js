@@ -179,6 +179,13 @@ function embedVideo(cellId, link) {
           clearElement(cell);
           cell.appendChild(embed);
         }
+      } else if((match = link.match(/^(https?:\/\/)?(www.)?xhamster.com\/embed\/(\w+)/))) {
+        const url = match[0];
+        if(url) {
+          embed.src = url;
+          clearElement(cell);
+          cell.appendChild(embed);
+        }
       }
     }
   }
