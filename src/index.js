@@ -15,6 +15,12 @@ function initializePage() {
   clearButton.onclick = (ev) => { clearAll(); }
   navbar.appendChild(clearButton);
 
+  const fullscreenButton = document.createElement('div');
+  fullscreenButton.innerHTML = 'FULLSCREEN';
+  fullscreenButton.classList.add('navbar-btn');
+  fullscreenButton.onclick = (ev) => { toggleFullscreen(); }
+  navbar.appendChild(fullscreenButton);
+
   createLayoutButtons(navbar, container);
   createGrid(container, 3, 3);
 
@@ -22,13 +28,19 @@ function initializePage() {
   document.body.appendChild(container);
 }
 
-function eventFire(el, etype){
-  if (el.fireEvent) {
-    el.fireEvent('on' + etype);
+function toggleFullscreen() {
+  if(document.fullscreenElement) {
+    document.exitFullscreen()
+      .then(() => console.log("Exited fullscreen mode"))
+      .catch((err) => console.error(err))
   } else {
-    var evObj = document.createEvent('Events');
-    evObj.initEvent(etype, true, false);
-    el.dispatchEvent(evObj);
+    if(document.body.requestFullscreen) {
+      document.body.requestFullscreen();
+    } else if (document.body.webkitRequestFullscreen) { /* Safari */
+      document.body.webkitRequestFullscreen();
+    } else if (document.body.msRequestFullscreen) { /* IE11 */
+      document.body.msRequestFullscreen();
+    }
   }
 }
 
