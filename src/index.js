@@ -186,7 +186,7 @@ function embedVideo(cellId, link) {
           clearElement(cell);
           cell.appendChild(embed);
         }
-      } else if((match = link.match(/^(https?:\/\/)?(www.)?youtube.com\/watch\?v\=(\w+)/))) {
+      } else if((match = link.match(/^(https?:\/\/)?(www.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/))) {
         const id = match[3];
         if(id) {
           embed.src = `https://www.youtube.com/embed/${id}`;
